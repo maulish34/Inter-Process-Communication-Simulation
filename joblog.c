@@ -72,6 +72,7 @@ int joblog_init(proc_t* proc) {
 job_t* joblog_read(proc_t* proc, int entry_num, job_t* job) {
     int originalErrno = errno;
 
+    job_t* job_ptr = job ? job : (job_t*)malloc(sizeof(job_t));
 
     if (!proc || entry_num < 0) {
         printf("NO proc or ENTRY < 0");
@@ -94,7 +95,7 @@ job_t* joblog_read(proc_t* proc, int entry_num, job_t* job) {
 
     char line[JOB_STR_SIZE];
 
-    job_t* job_ptr = job ? job : (job_t*)malloc(sizeof(job_t));
+//    job_t* job_ptr = job ? job : (job_t*)malloc(sizeof(job_t));
     if (!job_ptr) {
         printf("FAILED TO GENERATE JOB_PTR");
         fclose(file);

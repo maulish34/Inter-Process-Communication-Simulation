@@ -56,14 +56,6 @@ job_t* pri_jobqueue_dequeue(pri_jobqueue_t* pjq, job_t* dst) {
     }
 
     int highestPriorityIdx = 0;
-    int currentJobPriority;
-
-    for(int i = 0; i < JOB_BUFFER_SIZE; i++){
-        currentJobPriority = pjq->jobs[i].priority;
-        if(pjq->jobs[i].priority && currentJobPriority != 0 && currentJobPriority < pjq->jobs[highestPriorityIdx].priority){
-            highestPriorityIdx = i;
-        }
-    }
 
     if(!dst){
         dst = (job_t*) malloc(sizeof(job_t));
@@ -72,8 +64,22 @@ job_t* pri_jobqueue_dequeue(pri_jobqueue_t* pjq, job_t* dst) {
         }
     }
 
-    job_copy(&(pjq->jobs[highestPriorityIdx]), dst);
-    job_init(&(pjq->jobs[highestPriorityIdx]));
+    pri_jobqueue_peek(pjq, dst);
+
+    for(int j = 0; j < JOB_BUFFER_SIZE; j++){
+        if(pjq->jobs[j].priority && job_is_equal(&pjq->jobs[j], dst)){
+            highestPriorityIdx = j;
+            break;
+        }
+    }
+
+
+    for(int i = highestPriorityIdx; i < pjq->size; i++){
+
+        job_copy(&(pjq->jobs[i+1]), &(pjq->jobs[i]));
+    }
+
+    job_init(&(pjq->jobs[pjq->size-1]));
     pjq->size--;
     return dst;
 }
@@ -98,8 +104,8 @@ void pri_jobqueue_enqueue(pri_jobqueue_t* pjq, job_t* job) {
 
     job_copy(job, &(pjq->jobs[pri_jobqueue_size(pjq)]));
     pjq->size++;
-
     return;
+
 }
    
 /* 
@@ -140,22 +146,10 @@ job_t* pri_jobqueue_peek(pri_jobqueue_t* pjq, job_t* dst) {
     }
 
     int highestPriorityIdx = 0;
-    int currentJobPriority;
 
-//    int countInitialised = 0;
-//    for(int j = 0; j < JOB_BUFFER_SIZE; j++){
-//        if(pjq->jobs[j].priority){
-//            countInitialised++;
-//        }
-//    }
-//    printf("=============================\n");
-//    printf("Total initialised jobs: %d, JOB BUFF SIZE: %d, LIST SIZE: %d\n", countInitialised, JOB_BUFFER_SIZE, pjq->buf_size);
-//    printf("=============================\n");
+    for(int i = 0; i < pjq->size; i++){
 
-
-    for(int i = 0; i < JOB_BUFFER_SIZE; i++){
-        currentJobPriority = pjq->jobs[i].priority;
-        if(pjq->jobs[i].priority && currentJobPriority != 0 && currentJobPriority < pjq->jobs[highestPriorityIdx].priority){
+        if(pjq->jobs[i].priority < pjq->jobs[highestPriorityIdx].priority){
             highestPriorityIdx = i;
         }
     }
@@ -166,9 +160,7 @@ job_t* pri_jobqueue_peek(pri_jobqueue_t* pjq, job_t* dst) {
             return NULL;
         }
     }
-
     job_copy(&(pjq->jobs[highestPriorityIdx]), dst);
-//    job_init(&(pjq->jobs[highestPriorityIdx]));
     return dst;
 }
 
@@ -190,9 +182,7 @@ int pri_jobqueue_space(pri_jobqueue_t* pjq) {
     if(!pjq) {
         return 0;
     }
-
     return pjq->buf_size - pjq->size;
-
 }
 
 /* 
@@ -201,10 +191,8 @@ int pri_jobqueue_space(pri_jobqueue_t* pjq) {
  *      - see pri_jobqeue_new
  */
 void pri_jobqueue_delete(pri_jobqueue_t* pjq) {
-
     if (pjq) {
         free(pjq);
     }
-
     return;
 }

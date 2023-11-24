@@ -608,9 +608,6 @@ MunitResult test_jq_peek_full(test_jq_t* test_jq) {
     int i = 0;
 
     while (!tq_is_empty(test_jq)) {
-
-        printf("Loop entered: %d", i);
-
         job_t param_j;
         job_t expected_j;
         sjob_t sj;

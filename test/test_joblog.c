@@ -135,18 +135,19 @@ MunitResult test_sequential_joblog_read(pid_t cp_id, job_t
     
     job_t local_job;
     job_t* job = dynamic_alloc ? NULL : &local_job;
-//    printf("==========  JOB VALUE IN TEST: %d =============\n", job->pid);
+    
     int i = 0;
     int init_errno = errno;
     
     job_t* rjob = NULL;
     while ((rjob = joblog_read(proc, i, job))) {
-
+        
         munit_logf(MUNIT_LOG_DEBUG, 
             "Read entry %d: pid:%d,id:%u,pri:%u,%s", i, 
                 rjob->pid, rjob->id, rjob->priority, rjob->label);
         
         assert_not_null(rjob);
+        
         if (dynamic_alloc)
             assert_ptr_not_equal(rjob, &local_job);
         else
@@ -157,9 +158,7 @@ MunitResult test_sequential_joblog_read(pid_t cp_id, job_t
         assert_int(rjob->priority, ==, wjobs[i].priority);
        
         assert_string_equal(rjob->label, wjobs[i].label);
-
-//        printf("JOB IN TEST: %d %d %d %s\n", rjob->pid, rjob->id, rjob->priority, rjob->label);
-
+        
         if (dynamic_alloc) free(rjob);
         i++;
         if (test_errno) assert_int(errno, ==, init_errno);

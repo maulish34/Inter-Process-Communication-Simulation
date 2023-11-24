@@ -124,6 +124,9 @@ job_t* job_set(job_t* job, pid_t pid, unsigned int id, unsigned int priority,
  *      and the documentation in job.h for when to do dynamic allocation
  */
 char* job_to_str(job_t* job, char* str) {
+    if(!job){
+        return NULL;
+    }
     if(strlen(job->label) != (MAX_NAME_SIZE-1)){
         return NULL;
     }
@@ -133,7 +136,6 @@ char* job_to_str(job_t* job, char* str) {
     snprintf(str, JOB_STR_SIZE, JOB_STR_FMT, job->pid, job->id, job->priority, job->label);
     str[JOB_STR_SIZE] = '\0';
 //    printf("JOB TO STR: %s\n", str);
-
     return str;
 }
 
@@ -143,25 +145,28 @@ char* job_to_str(job_t* job, char* str) {
  * - see the hint for job_to_str
  */
 job_t* str_to_job(char* str, job_t* job) {
-    if(!str || ((strlen(str)) != (JOB_STR_SIZE-1))){
-//        job_delete(job);
+    if(!str || ((strlen(str)) != (JOB_STR_SIZE-1))) {
         return NULL;
     }
 
     if(!job){
         job = (job_t*) malloc(sizeof(job_t));
+        if(!job){
+            return NULL;
+        }
     }
 
     int numPassedValues = sscanf(str, JOB_STR_FMT,(int*) &job->pid, &job->id, &job->priority, job->label);
     job->label[MAX_NAME_SIZE] = '\0';
     if((strlen(job->label)) != (MAX_NAME_SIZE-1)){
+
         return NULL;
     }
 //    printf("ARGUMENTS PASSED WHILE CONVERSION: %d\n", numPassedValues);
     if(numPassedValues == 4){
-//        printf("JOB PID AT THE END OF STR_TO_JOB: %d\n", job->pid);
-//        printf("%s",str);
         return job;
+    } else{
+        job_delete(job);
     }
     return NULL;
 }

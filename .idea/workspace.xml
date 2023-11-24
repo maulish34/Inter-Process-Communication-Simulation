@@ -18,7 +18,50 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d14fc93b-1f17-48a1-b064-f9f19111e894" name="Changes" comment="" />
+    <list default="true" id="d14fc93b-1f17-48a1-b064-f9f19111e894" name="Changes" comment="Fix bugs: &#10;- Delete dynamically allocated job if str_to_job fails&#10;- make adjustments in joblog_read for the same">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/test/test_ipc_jobqueue" beforeDir="false" afterPath="$PROJECT_DIR$/bin/test/test_ipc_jobqueue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/test/test_job" beforeDir="false" afterPath="$PROJECT_DIR$/bin/test/test_job" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/test/test_joblog" beforeDir="false" afterPath="$PROJECT_DIR$/bin/test/test_joblog" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/test/test_pri_jobqueue" beforeDir="false" afterPath="$PROJECT_DIR$/bin/test/test_pri_jobqueue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/test/test_sem_jobqueue" beforeDir="false" afterPath="$PROJECT_DIR$/bin/test/test_sem_jobqueue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/depend/ipc_jobqueue.d" beforeDir="false" afterPath="$PROJECT_DIR$/depend/ipc_jobqueue.d" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/depend/sem_jobqueue.d" beforeDir="false" afterPath="$PROJECT_DIR$/depend/sem_jobqueue.d" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/depend/test/procs4tests.d" beforeDir="false" afterPath="$PROJECT_DIR$/depend/test/procs4tests.d" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/depend/test/test_ipc.d" beforeDir="false" afterPath="$PROJECT_DIR$/depend/test/test_ipc.d" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/depend/test/test_ipc_jobqueue.d" beforeDir="false" afterPath="$PROJECT_DIR$/depend/test/test_ipc_jobqueue.d" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/depend/test/test_job.d" beforeDir="false" afterPath="$PROJECT_DIR$/depend/test/test_job.d" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/depend/test/test_joblog.d" beforeDir="false" afterPath="$PROJECT_DIR$/depend/test/test_joblog.d" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/depend/test/test_jobqueue_common.d" beforeDir="false" afterPath="$PROJECT_DIR$/depend/test/test_jobqueue_common.d" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/depend/test/test_pri_jobqueue.d" beforeDir="false" afterPath="$PROJECT_DIR$/depend/test/test_pri_jobqueue.d" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/depend/test/test_proc.d" beforeDir="false" afterPath="$PROJECT_DIR$/depend/test/test_proc.d" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/depend/test/test_sem_jobqueue.d" beforeDir="false" afterPath="$PROJECT_DIR$/depend/test/test_sem_jobqueue.d" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/depend/test/test_shobject_name.d" beforeDir="false" afterPath="$PROJECT_DIR$/depend/test/test_shobject_name.d" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ipc_jobqueue.c" beforeDir="false" afterPath="$PROJECT_DIR$/ipc_jobqueue.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/job.c" beforeDir="false" afterPath="$PROJECT_DIR$/job.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/job.h" beforeDir="false" afterPath="$PROJECT_DIR$/job.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/objects/job.o" beforeDir="false" afterPath="$PROJECT_DIR$/objects/job.o" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/objects/joblog.o" beforeDir="false" afterPath="$PROJECT_DIR$/objects/joblog.o" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/objects/pri_jobqueue.o" beforeDir="false" afterPath="$PROJECT_DIR$/objects/pri_jobqueue.o" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/objects/test/test_ipc_jobqueue.o" beforeDir="false" afterPath="$PROJECT_DIR$/objects/test/test_ipc_jobqueue.o" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/objects/test/test_job.o" beforeDir="false" afterPath="$PROJECT_DIR$/objects/test/test_job.o" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/objects/test/test_joblog.o" beforeDir="false" afterPath="$PROJECT_DIR$/objects/test/test_joblog.o" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/objects/test/test_jobqueue_common.o" beforeDir="false" afterPath="$PROJECT_DIR$/objects/test/test_jobqueue_common.o" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/objects/test/test_pri_jobqueue.o" beforeDir="false" afterPath="$PROJECT_DIR$/objects/test/test_pri_jobqueue.o" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/objects/test/test_sem_jobqueue.o" beforeDir="false" afterPath="$PROJECT_DIR$/objects/test/test_sem_jobqueue.o" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pri_jobqueue.c" beforeDir="false" afterPath="$PROJECT_DIR$/pri_jobqueue.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/test_ipc_jobqueue.c" beforeDir="false" afterPath="$PROJECT_DIR$/test/test_ipc_jobqueue.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/test_ipc_jobqueue.h" beforeDir="false" afterPath="$PROJECT_DIR$/test/test_ipc_jobqueue.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/test_job.c" beforeDir="false" afterPath="$PROJECT_DIR$/test/test_job.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/test_job.h" beforeDir="false" afterPath="$PROJECT_DIR$/test/test_job.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/test_joblog.c" beforeDir="false" afterPath="$PROJECT_DIR$/test/test_joblog.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/test_jobqueue_common.c" beforeDir="false" afterPath="$PROJECT_DIR$/test/test_jobqueue_common.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/test_jobqueue_common.h" beforeDir="false" afterPath="$PROJECT_DIR$/test/test_jobqueue_common.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/test_pri_jobqueue.c" beforeDir="false" afterPath="$PROJECT_DIR$/test/test_pri_jobqueue.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/test_pri_jobqueue.h" beforeDir="false" afterPath="$PROJECT_DIR$/test/test_pri_jobqueue.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/test_sem_jobqueue.c" beforeDir="false" afterPath="$PROJECT_DIR$/test/test_sem_jobqueue.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/test_sem_jobqueue.h" beforeDir="false" afterPath="$PROJECT_DIR$/test/test_sem_jobqueue.h" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -77,24 +120,31 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.cidr.known.project.marker": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "cf.first.check.clang-format": "false",
-    "cidr.known.project.marker": "true",
-    "git-widget-placeholder": "master",
-    "last_opened_file_path": "C:/Users/Computer Science/CLionProjects/220451374_CSC2035_asignment2",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "settings.editor.selected.configurable": "preferences.lookFeel",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.cidr.known.project.marker&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;cf.first.check.clang-format&quot;: &quot;false&quot;,
+    &quot;cidr.known.project.marker&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/Computer Science/CLionProjects/220451374_CSC2035_asignment2&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.lookFeel&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
+  <component name="RunManager">
+    <configuration name="runtests.sh" type="CppFileRunConfiguration" factoryName="CppFileRunConfiguration" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true">
+      <method v="2">
+        <option name="com.jetbrains.cidr.cpp.runfile.CppFileBuildBeforeRunTaskProvider$BasicBuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -110,7 +160,20 @@
       <workItem from="1700658558033" duration="2627000" />
       <workItem from="1700662546515" duration="90000" />
       <workItem from="1700662648567" duration="89000" />
+      <workItem from="1700672002558" duration="289000" />
+      <workItem from="1700688660868" duration="82000" />
+      <workItem from="1700760047003" duration="14294000" />
+      <workItem from="1700862106782" duration="2042000" />
     </task>
+    <task id="LOCAL-00001" summary="Fix bugs: &#10;- Delete dynamically allocated job if str_to_job fails&#10;- make adjustments in joblog_read for the same">
+      <option name="closed" value="true" />
+      <created>1700672288369</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1700672288369</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -121,5 +184,9 @@
     <isAutomaticCheckingOnLaunch value="false" />
     <isAutomaticFoundErrors value="true" />
     <isAutomaticFoundErrors value="true" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Fix bugs: &#10;- Delete dynamically allocated job if str_to_job fails&#10;- make adjustments in joblog_read for the same" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fix bugs: &#10;- Delete dynamically allocated job if str_to_job fails&#10;- make adjustments in joblog_read for the same" />
   </component>
 </project>

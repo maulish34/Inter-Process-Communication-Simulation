@@ -1,6 +1,6 @@
 /*
  * Replace the following string of 0s with your student number
- * 000000000
+ * 220451374
  */
 #include <fcntl.h>          /* For O_* constants */
 #include <sys/stat.h>       /* For mode constants */
@@ -114,7 +114,15 @@ sem_jobqueue_t* sem_jobqueue_new(proc_t* proc) {
  * sem_jobqueue.h
  */
 job_t* sem_jobqueue_dequeue(sem_jobqueue_t* sjq, job_t* dst) {
-    return NULL;
+    if(!sjq || sem_wait(sjq->mutex) != 0){
+        return NULL;
+    }
+
+    ipc_jobqueue_dequeue(sjq->ijq, dst);
+
+    sem_post(sjq->mutex);
+
+    return dst;
 }
 
 /* 
@@ -122,6 +130,14 @@ job_t* sem_jobqueue_dequeue(sem_jobqueue_t* sjq, job_t* dst) {
  * sem_jobqueue.h
  */
 void sem_jobqueue_enqueue(sem_jobqueue_t* sjq, job_t* job) {
+    if(!sjq || sem_wait(sjq->mutex) != 0){
+        return;
+    }
+
+    ipc_jobqueue_enqueue(sjq->ijq, job);
+
+    sem_post(sjq->mutex);
+
     return;
 }
 
@@ -130,7 +146,15 @@ void sem_jobqueue_enqueue(sem_jobqueue_t* sjq, job_t* job) {
  * sem_jobqueue.h
  */
 bool sem_jobqueue_is_empty(sem_jobqueue_t* sjq) {
-    return true;
+    if(!sjq || sem_wait(sjq->mutex) != 0){
+        return true;
+    }
+
+    bool isEmpty = ipc_jobqueue_is_empty(sjq->ijq);
+
+    sem_post(sjq->mutex);
+
+    return isEmpty;
 }
 
 /* 
@@ -138,7 +162,15 @@ bool sem_jobqueue_is_empty(sem_jobqueue_t* sjq) {
  * sem_jobqueue.h
  */
 bool sem_jobqueue_is_full(sem_jobqueue_t* sjq) {
-    return true;
+    if(!sjq || sem_wait(sjq->mutex) != 0){
+        return true;
+    }
+
+    bool isFull = ipc_jobqueue_is_full(sjq->ijq);
+
+    sem_post(sjq->mutex);
+
+    return isFull;
 }
 
 /* 
@@ -146,7 +178,15 @@ bool sem_jobqueue_is_full(sem_jobqueue_t* sjq) {
  * sem_jobqueue.h
  */
 job_t* sem_jobqueue_peek(sem_jobqueue_t* sjq, job_t* dst) {
-    return NULL;
+    if(!sjq || sem_wait(sjq->mutex) != 0){
+        return NULL;
+    }
+
+    ipc_jobqueue_peek(sjq->ijq, dst);
+
+    sem_post(sjq->mutex);
+
+    return dst;
 }
 
 /* 
@@ -154,7 +194,15 @@ job_t* sem_jobqueue_peek(sem_jobqueue_t* sjq, job_t* dst) {
  * sem_jobqueue.h
  */
 int sem_jobqueue_size(sem_jobqueue_t* sjq) {
-    return 0;
+    if(!sjq || sem_wait(sjq->mutex) != 0){
+        return 0;
+    }
+
+    int size = ipc_jobqueue_size(sjq->ijq);
+
+    sem_post(sjq->mutex);
+
+    return size;
 }
 
 /* 
@@ -162,7 +210,15 @@ int sem_jobqueue_size(sem_jobqueue_t* sjq) {
  * sem_jobqueue.h
  */
 int sem_jobqueue_space(sem_jobqueue_t* sjq) {
-    return 0;
+    if(!sjq || sem_wait(sjq->mutex) != 0){
+        return 0;
+    }
+
+    int space = ipc_jobqueue_space(sjq->ijq);
+
+    sem_post(sjq->mutex);
+
+    return space;
 }
 
 /* 
@@ -173,5 +229,9 @@ int sem_jobqueue_space(sem_jobqueue_t* sjq) {
  *      order
  */
 void sem_jobqueue_delete(sem_jobqueue_t* sjq) {
+    if(sjq && sem_wait(sjq->mutex) == 0){
+        sem_delete(sjq->mutex, sem_mutex_label);
+        free(sjq);
+    }
     return;
 }

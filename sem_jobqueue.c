@@ -114,14 +114,21 @@ sem_jobqueue_t* sem_jobqueue_new(proc_t* proc) {
  * sem_jobqueue.h
  */
 job_t* sem_jobqueue_dequeue(sem_jobqueue_t* sjq, job_t* dst) {
-    if(!sjq || sem_wait(sjq->mutex) != 0){
+    if(!sjq){
+        return NULL;
+    }
+
+    sem_wait(sjq->full);
+
+    if(sem_wait(sjq->mutex) != 0){
+        sem_post(sjq->full);
         return NULL;
     }
 
     ipc_jobqueue_dequeue(sjq->ijq, dst);
 
     sem_post(sjq->mutex);
-
+    sem_post(sjq->empty);
     return dst;
 }
 
@@ -130,13 +137,21 @@ job_t* sem_jobqueue_dequeue(sem_jobqueue_t* sjq, job_t* dst) {
  * sem_jobqueue.h
  */
 void sem_jobqueue_enqueue(sem_jobqueue_t* sjq, job_t* job) {
-    if(!sjq || sem_wait(sjq->mutex) != 0){
+    if(!sjq){
         return;
     }
+
+    sem_wait(sjq->empty);
+
+    if(sem_wait(sjq->mutex) != 0){
+        sem_post(sjq->empty);
+    }
+
 
     ipc_jobqueue_enqueue(sjq->ijq, job);
 
     sem_post(sjq->mutex);
+    sem_post(sjq->full);
 
     return;
 }

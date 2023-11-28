@@ -131,9 +131,7 @@ int ipc_jobqueue_space(ipc_jobqueue_t* ijq) {
  */
 void ipc_jobqueue_delete(ipc_jobqueue_t* ijq) {
 
-    if(ijq){
-       free(ijq);
-    }
+    ipc_delete(ijq);
 
     return;
 }

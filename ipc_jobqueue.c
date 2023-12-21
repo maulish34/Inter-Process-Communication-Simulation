@@ -133,5 +133,4 @@ void ipc_jobqueue_delete(ipc_jobqueue_t* ijq) {
 
     ipc_delete(ijq);
 
-    return;
 }

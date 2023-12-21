@@ -18,12 +18,24 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d14fc93b-1f17-48a1-b064-f9f19111e894" name="Changes" comment="ipc_jobqueue is implemented and bugs fixed">
+    <list default="true" id="d14fc93b-1f17-48a1-b064-f9f19111e894" name="Changes" comment="changed ipc_jobqueue delete to use ipc delete">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/test/test_ipc_jobqueue" beforeDir="false" afterPath="$PROJECT_DIR$/bin/test/test_ipc_jobqueue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/test/test_job" beforeDir="false" afterPath="$PROJECT_DIR$/bin/test/test_job" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/test/test_joblog" beforeDir="false" afterPath="$PROJECT_DIR$/bin/test/test_joblog" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/test/test_pri_jobqueue" beforeDir="false" afterPath="$PROJECT_DIR$/bin/test/test_pri_jobqueue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bin/test/test_sem_jobqueue" beforeDir="false" afterPath="$PROJECT_DIR$/bin/test/test_sem_jobqueue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ipc_jobqueue.c" beforeDir="false" afterPath="$PROJECT_DIR$/ipc_jobqueue.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/job.c" beforeDir="false" afterPath="$PROJECT_DIR$/job.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/joblog.c" beforeDir="false" afterPath="$PROJECT_DIR$/joblog.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/objects/ipc_jobqueue.o" beforeDir="false" afterPath="$PROJECT_DIR$/objects/ipc_jobqueue.o" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/objects/job.o" beforeDir="false" afterPath="$PROJECT_DIR$/objects/job.o" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/objects/joblog.o" beforeDir="false" afterPath="$PROJECT_DIR$/objects/joblog.o" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/objects/pri_jobqueue.o" beforeDir="false" afterPath="$PROJECT_DIR$/objects/pri_jobqueue.o" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/objects/sem_jobqueue.o" beforeDir="false" afterPath="$PROJECT_DIR$/objects/sem_jobqueue.o" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pri_jobqueue.c" beforeDir="false" afterPath="$PROJECT_DIR$/pri_jobqueue.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/sem_jobqueue.c" beforeDir="false" afterPath="$PROJECT_DIR$/sem_jobqueue.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/todo" beforeDir="false" afterPath="$PROJECT_DIR$/todo" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -129,7 +141,14 @@
       <workItem from="1700760047003" duration="14294000" />
       <workItem from="1700862106782" duration="13428000" />
       <workItem from="1700934388503" duration="12338000" />
-      <workItem from="1701182661201" duration="801000" />
+      <workItem from="1701182661201" duration="1648000" />
+      <workItem from="1701395042296" duration="289000" />
+      <workItem from="1701441956849" duration="3585000" />
+      <workItem from="1702131422753" duration="10306000" />
+      <workItem from="1702326998945" duration="200000" />
+      <workItem from="1702413518170" duration="304000" />
+      <workItem from="1702413887751" duration="188000" />
+      <workItem from="1703021916270" duration="979000" />
     </task>
     <task id="LOCAL-00001" summary="Fix bugs: &#10;- Delete dynamically allocated job if str_to_job fails&#10;- make adjustments in joblog_read for the same">
       <option name="closed" value="true" />
@@ -163,7 +182,15 @@
       <option name="project" value="LOCAL" />
       <updated>1700950483245</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="changed ipc_jobqueue delete to use ipc delete">
+      <option name="closed" value="true" />
+      <created>1701192127081</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1701192127081</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -180,6 +207,7 @@
     <MESSAGE value="pri_jobqueue is implemented" />
     <MESSAGE value="pri_jobqueue is implemented and bugs fixed" />
     <MESSAGE value="ipc_jobqueue is implemented and bugs fixed" />
-    <option name="LAST_COMMIT_MESSAGE" value="ipc_jobqueue is implemented and bugs fixed" />
+    <MESSAGE value="changed ipc_jobqueue delete to use ipc delete" />
+    <option name="LAST_COMMIT_MESSAGE" value="changed ipc_jobqueue delete to use ipc delete" />
   </component>
 </project>

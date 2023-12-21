@@ -1,6 +1,6 @@
 /*
  * Replace the following string of 0s with your student number
- * 000000000
+ * 220451374
  */
 #include <stdlib.h>
 #include <stdbool.h>
@@ -15,21 +15,21 @@
  */
 pri_jobqueue_t* pri_jobqueue_new() {
 
-    pri_jobqueue_t* job_queue = (pri_jobqueue_t *) malloc(sizeof(pri_jobqueue_t));
+    pri_jobqueue_t* pjq = (pri_jobqueue_t *) malloc(sizeof(pri_jobqueue_t));
 
-    if(!job_queue){
-        return NULL;
-    }
+    pri_jobqueue_init(pjq);
 
-    pri_jobqueue_init(job_queue);
-
-    return job_queue;
+    return pjq;
 }
 
 /* 
  * TODO: you must implement this function.
  */
 void pri_jobqueue_init(pri_jobqueue_t* pjq) {
+
+    if(!pjq){
+        return;
+    }
 
     pjq->size = 0;
     pjq->buf_size=JOB_BUFFER_SIZE;
@@ -38,7 +38,6 @@ void pri_jobqueue_init(pri_jobqueue_t* pjq) {
         job_init(&pjq->jobs[i]);
     }
 
-    return;
 }
 
 /* 
@@ -51,6 +50,7 @@ void pri_jobqueue_init(pri_jobqueue_t* pjq) {
  *      that was on the queue
  */
 job_t* pri_jobqueue_dequeue(pri_jobqueue_t* pjq, job_t* dst) {
+
     if(pri_jobqueue_is_empty(pjq)){
         return NULL;
     }
@@ -73,7 +73,7 @@ job_t* pri_jobqueue_dequeue(pri_jobqueue_t* pjq, job_t* dst) {
         }
     }
 
-    for(int i = highestPriorityIdx; i < pjq->buf_size; i++){
+    for(int i = highestPriorityIdx; i < pjq->size; i++){
         job_copy(&(pjq->jobs[i+1]), &(pjq->jobs[i]));
     }
 
@@ -102,7 +102,6 @@ void pri_jobqueue_enqueue(pri_jobqueue_t* pjq, job_t* job) {
 
     job_copy(job, &(pjq->jobs[pri_jobqueue_size(pjq)]));
     pjq->size++;
-    return;
 }
    
 /* 
@@ -190,5 +189,4 @@ void pri_jobqueue_delete(pri_jobqueue_t* pjq) {
     if (pjq) {
         free(pjq);
     }
-    return;
 }

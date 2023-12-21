@@ -145,15 +145,13 @@ void sem_jobqueue_enqueue(sem_jobqueue_t* sjq, job_t* job) {
 
     if(sem_wait(sjq->mutex) != 0){
         sem_post(sjq->empty);
+        return;
     }
-
 
     ipc_jobqueue_enqueue(sjq->ijq, job);
 
     sem_post(sjq->mutex);
     sem_post(sjq->full);
-
-    return;
 }
 
 /* 
@@ -245,8 +243,10 @@ int sem_jobqueue_space(sem_jobqueue_t* sjq) {
  */
 void sem_jobqueue_delete(sem_jobqueue_t* sjq) {
     if(sjq && sem_wait(sjq->mutex) == 0){
+        ipc_jobqueue_delete(sjq->ijq);
         sem_delete(sjq->mutex, sem_mutex_label);
+        sem_delete(sjq->full, sem_full_label);
+        sem_delete(sjq->empty, sem_empty_label);
         free(sjq);
     }
-    return;
 }

@@ -1,6 +1,6 @@
 /*
  * Replace the following string of 0s with your student number
- * 000000000
+ * 220451374
  */
 #include <stdio.h>
 #include <unistd.h>
@@ -72,73 +72,60 @@ int joblog_init(proc_t* proc) {
 job_t* joblog_read(proc_t* proc, int entry_num, job_t* job) {
     int originalErrno = errno;
 
-    job_t* job_ptr = job ? job : (job_t*)malloc(sizeof(job_t));
 
     if (!proc || entry_num < 0) {
-        printf("NO proc or ENTRY < 0");
         errno = originalErrno;
         return NULL;
     }
 
     char* filename = new_log_name(proc);
     if (!filename) {
-        printf("NO FILENAME");
         errno = originalErrno;
         return NULL;
     }
+
     FILE* file = fopen(filename, "r");
     if (!file) {
-        printf("NO FILE FOUND WITH GENERATED NAME");
+        free(filename);
         errno = originalErrno;
         return NULL;
     }
 
     char line[JOB_STR_SIZE];
 
-//    job_t* job_ptr = job ? job : (job_t*)malloc(sizeof(job_t));
-    if (!job_ptr) {
-        printf("FAILED TO GENERATE JOB_PTR");
-        fclose(file);
-        errno = originalErrno;
-        return NULL;
+    if(!job){
+        job = (job_t*)malloc(sizeof(job_t));
+        if (!job) {
+            fclose(file);
+            free(filename);
+            errno = originalErrno;
+            return NULL;
+        }
     }
+
 
     int i = 0;
     while(i<=entry_num){
-
         if (!fgets(line, sizeof (line), file)) {
-
             if(feof(file)){
                 break;
             } else{
-                printf("FAILED TO REACH REQUIRED LINE");
-
                 job_delete(job);
-
                 fclose(file);
                 errno = originalErrno;
                 return NULL;
             }
         }
-
         if(strlen(line) > 1){
             i++;
         }
     }
-
-
-//    printf("TRYING TO CONVERT\n");
-    job_ptr = str_to_job(line, job_ptr);
-
+    job = str_to_job(line, job);
     fclose(file);
-//    printf("CONVERTED TO JOB STRUCT\n");
-    if(job_ptr){
-//        printf("JOB: %d %d %d %s\n", job_ptr->pid, job_ptr->id, job_ptr->priority, job_ptr->label);
-//        printf("READ FINISHED\n");
-        return job_ptr;
+    if(job){
+        return job;
     }
-
-
+    free(filename);
     errno = originalErrno;
     return NULL;
 }
@@ -157,9 +144,10 @@ void joblog_write(proc_t* proc, job_t* job) {
         errno = originalErrno;
         return;
     }
+
     char* filename = new_log_name(proc);
+
     if (!filename) {
-        printf("NO FILENAME");
         errno = originalErrno;
         return;
     }
@@ -167,6 +155,7 @@ void joblog_write(proc_t* proc, job_t* job) {
     FILE *file = fopen(filename, "a");
 
     if(!file){
+        free(filename);
         errno = originalErrno;
         return;
     }
@@ -174,19 +163,15 @@ void joblog_write(proc_t* proc, job_t* job) {
     char str[JOB_STR_SIZE];
 
     job_to_str(job, str);
-    str[JOB_STR_SIZE-1] = '\n';
-//    printf("JOBLOG WRITE: %s\n", str);
 
-        if (fputs(str, file) == EOF){
-            errno = originalErrno;
-            return;
-        }
-    
+    if (fprintf(file, "%s\n", str) < 0){
+        errno = originalErrno;
+    }
 
     fclose(file);
-
-        errno = originalErrno;
-        return;
+    free(filename);
+    errno = originalErrno;
+    return;
 }
 
 /* 
@@ -196,8 +181,16 @@ void joblog_delete(proc_t* proc) {
 
     int originalErrno = errno;
 
-    if(proc){
-        remove(new_log_name(proc));
+    if(!proc){
+        errno = originalErrno;
+        return;
+    }
+
+    char* filename = new_log_name(proc);
+
+    if(filename){
+        unlink(filename);
+        free(filename);
     }
 
     errno = originalErrno;

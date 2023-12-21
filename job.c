@@ -31,9 +31,10 @@ job_t* job_copy(job_t* src, job_t* dst) {
         return dst;
     }
     if(!dst) {
-        dst = (job_t *) malloc(sizeof(job_t));
+        dst = job_new(src->pid, src->id, src->priority, src->label);
         if (dst == NULL)
             return NULL;
+        return dst;
     }
 
     dst->pid = src->pid;
@@ -42,7 +43,6 @@ job_t* job_copy(job_t* src, job_t* dst) {
     strncpy(dst->label, src->label, MAX_NAME_SIZE-1);
     dst->label[MAX_NAME_SIZE-1] = '\0';
     return dst;
-
 }
 
 /* 
@@ -53,7 +53,8 @@ void job_init(job_t* job) {
         job->pid = 0;
         job->id = 0;
         job->priority = 0;
-        strcpy(job->label, PAD_STRING);
+        strncpy(job->label, PAD_STRING, MAX_NAME_SIZE-1);
+        job->label[MAX_NAME_SIZE-1] = '\0';
     }
 }
 
@@ -67,15 +68,18 @@ bool job_is_equal(job_t* j1, job_t* j2) {
     if(!j1 || !j2){
         return false;
     }
+
+//    check for two equal pointers
     if(j1 == j2){
         return true;
     }
+
     bool comparePid = j1->pid==j2->pid;
     bool compareId = j1->id==j2->id;
     bool comparePriority = j1->priority==j2->priority;
-    int compareResult = strcmp(j1->label, j2->label);
+    int compareLabel = strcmp(j1->label, j2->label);
 
-    if(comparePid && compareId && comparePriority && (compareResult == 0)){
+    if(comparePid && compareId && comparePriority && (compareLabel == 0)){
         return true;
     }
     return false;
@@ -135,7 +139,7 @@ char* job_to_str(job_t* job, char* str) {
     }
     snprintf(str, JOB_STR_SIZE, JOB_STR_FMT, job->pid, job->id, job->priority, job->label);
     str[JOB_STR_SIZE] = '\0';
-//    printf("JOB TO STR: %s\n", str);
+
     return str;
 }
 
@@ -162,7 +166,7 @@ job_t* str_to_job(char* str, job_t* job) {
 
         return NULL;
     }
-//    printf("ARGUMENTS PASSED WHILE CONVERSION: %d\n", numPassedValues);
+
     if(numPassedValues == 4){
         return job;
     } else{
@@ -180,5 +184,4 @@ void job_delete(job_t* job) {
     if(job){
         free(job);
     }
-    return;
 }
